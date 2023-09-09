@@ -23,4 +23,3 @@ alias enumsecproducts {
     blog($bid, "Tasked to list running security products..");
     beacon_inline_execute($bid, $data, "go", $arg_data);
 }
-

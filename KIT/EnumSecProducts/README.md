@@ -17,4 +17,3 @@ Get a list of security products like AV/EDR that are running on the current- or 
 - 3\. Run the `bofcompile.bat` script to compile the object file. 
 - 4\. In Cobalt strike, use the script manager to load the .cna script to import the tool. 
 
-
