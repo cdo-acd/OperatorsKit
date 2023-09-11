@@ -87,7 +87,7 @@ void printoutput(BOOL done) {
 
 
 
-void go(char *args, int len) {
+int go(char *args, int len) {
 	CHAR *hostName = "";
 	HANDLE handleHost = NULL;
     datap parser;
