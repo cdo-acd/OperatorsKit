@@ -99,7 +99,7 @@ void go(char *args, int len) {
 	
     BeaconDataParse(&parser, args, len);
     hostName = BeaconDataExtract(&parser, &argSize);
-	if(!bofstart()) return;
+	if(!bofstart()) return -1;
 
 	//allocate memory for list
 	size_t numSoftware = 130; //130
