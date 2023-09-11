@@ -20,15 +20,15 @@ typedef struct {
 char *output = 0;  
 WORD currentoutsize = 0;
 HANDLE trash = NULL; 
-// int bofstart();
+int bofstart();
 void internal_printf(const char* format, ...);
 void printoutput(BOOL done);
 
-// int bofstart() {   
-//     output = (char*)MSVCRT$calloc(bufsize, 1);
-//     currentoutsize = 0;
-//     return 1;
-// }
+int bofstart() {   
+    output = (char*)MSVCRT$calloc(bufsize, 1);
+    currentoutsize = 0;
+    return 1;
+}
 
 void internal_printf(const char* format, ...){
     int buffersize = 0;
@@ -87,7 +87,7 @@ void printoutput(BOOL done) {
 
 
 
-int go(char *args, int len) {
+void go(char *args, int len) {
 	CHAR *hostName = "";
 	HANDLE handleHost = NULL;
     datap parser;
@@ -99,7 +99,7 @@ int go(char *args, int len) {
 	
     BeaconDataParse(&parser, args, len);
     hostName = BeaconDataExtract(&parser, &argSize);
-	// if(!bofstart()) return -1;
+	if(!bofstart()) return;
 
 	//allocate memory for list
 	size_t numSoftware = 130; //130
