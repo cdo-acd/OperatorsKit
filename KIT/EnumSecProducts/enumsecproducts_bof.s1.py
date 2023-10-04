@@ -4,7 +4,7 @@ from outflank_stage1.task.enums import BOFArgumentEncoding
 
 class FindFileBOF(BaseBOFTask):
     def __init__(self):
-        super().__init__("enumsecproducts")
+        super().__init__("enumsecproducts", base_binary_name="enumsecproducts")
 
         self.parser.add_argument(
             "--hostname",
