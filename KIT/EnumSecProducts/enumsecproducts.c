@@ -102,7 +102,7 @@ void go(char *args, int len) {
 	if(!bofstart()) return;
 
 	//allocate memory for list
-	size_t numSoftware = 144; //144
+	size_t numSoftware = 150; //150
     SoftwareData *softwareList = (SoftwareData *)KERNEL32$VirtualAlloc(NULL, numSoftware * sizeof(SoftwareData), MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
     if (softwareList == NULL) {
 		BeaconPrintf(CALLBACK_ERROR, "Failed to allocate memory for softwareList.\n");
@@ -670,11 +670,11 @@ void go(char *args, int len) {
 	softwareList[139].description = L"Trend Micro";
 	softwareList[139].category = L"EDR";
 
-	softwareList[140].filename = "coreFrameworkHost.exe";
+	softwareList[140].filename = "coreframeworkhost.exe";
 	softwareList[140].description = L"Trend Micro";
 	softwareList[140].category = L"EDR";
 
-	softwareList[141].filename = "coreServiceShell.exe";
+	softwareList[141].filename = "coreserviceshell.exe";
 	softwareList[141].description = L"Trend Micro";
 	softwareList[141].category = L"EDR";
 
@@ -682,11 +682,35 @@ void go(char *args, int len) {
 	softwareList[142].description = L"Trend Micro";
 	softwareList[142].category = L"EDR";
 
-	softwareList[143].filename = "Notifier.exe";
+	softwareList[143].filename = "notifier.exe";
 	softwareList[143].description = L"Trend Micro";
 	softwareList[143].category = L"EDR";
 
-	//End security product list
+	softwareList[144].filename = "SentinelServiceHost.exe";
+	softwareList[144].description = L"SentinelOne";
+	softwareList[144].category = L"EDR";
+
+	softwareList[145].filename = "sentinelstaticengine.exe";
+	softwareList[145].description = L"SentinelOne";
+	softwareList[145].category = L"EDR";
+
+	softwareList[146].filename = "sentinelstaticenginescanner.exe";
+	softwareList[146].description = L"SentinelOne";
+	softwareList[146].category = L"EDR";
+
+	softwareList[147].filename = "sentinelhelperservice.exe";
+	softwareList[147].description = L"SentinelOne";
+	softwareList[147].category = L"EDR";
+
+	softwareList[148].filename = "sentinelagent.exe";
+	softwareList[148].description = L"SentinelOne";
+	softwareList[148].category = L"EDR";
+
+	softwareList[149].filename = "sentinelmemoryscanner.exe";
+	softwareList[149].description = L"SentinelOne";
+	softwareList[149].category = L"EDR";
+
+	//End security product list - LOWERCASE FILENAME
 
 	
 	//get handle to specified host
@@ -711,6 +735,8 @@ void go(char *args, int len) {
 		for (size_t i = 0; procName[i]; i++) {
             procName[i] = MSVCRT$tolower(procName[i]); 
         }
+
+		// internal_printf("%s\n", procName);
 		
 		for (size_t i = 0; i < numSoftware; i++) {
 			if (MSVCRT$strcmp(procName, softwareList[i].filename) == 0) {
