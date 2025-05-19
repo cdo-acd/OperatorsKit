@@ -21,8 +21,8 @@ class CredPromptBof(BaseBOFTask):
         self, arguments: List[str]
     ) -> List[Tuple[BOFArgumentEncoding, str]]:
         parser_arguments = self.parser.parse_args(arguments)
-        title = parser_arguments.title
-        message = parser_arguments.message
+        title = parser_arguments.title.strip("'").strip('"')
+        message = parser_arguments.message.strip("'").strip('"')
         timer = int(parser_arguments.timer)
 
         return [
