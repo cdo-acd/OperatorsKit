@@ -13,9 +13,9 @@ class CredPromptBof(BaseBOFTask):
             "Prompt the user for their credentials. Specify the title and message of the popup box and also how long it'll run for."
         )
 
-        self.parser.add_argument("title", help="Title of the prompt popup.", required=True)
-        self.parser.add_argument("message", help="Message of the prompt popup.", required=True)
-        self.parser.add_argument("timer", type=int, help="Timeout in seconds.", required=True)
+        self.parser.add_argument("title", help="Title of the prompt popup.")
+        self.parser.add_argument("message", help="Message of the prompt popup.")
+        self.parser.add_argument("timer", type=int, help="Timeout in seconds.")
 
     def _encode_arguments_bof(
         self, arguments: List[str]
