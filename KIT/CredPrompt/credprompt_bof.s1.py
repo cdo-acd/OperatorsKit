@@ -27,6 +27,6 @@ class CredPromptBof(BaseBOFTask):
 
         return [
             (BOFArgumentEncoding.WSTR, title),
-            (BOFArgumentEncoding.WSTR, message)
-            (BOFArgumentEncoding.INT, timer)
+            (BOFArgumentEncoding.WSTR, message),
+            (BOFArgumentEncoding.INT, timer),
         ]
