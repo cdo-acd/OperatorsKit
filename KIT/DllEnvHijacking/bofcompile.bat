@@ -1,6 +1,17 @@
-@ECHO OFF
+@echo off
+setlocal
 
-cl.exe /nologo /c /Od /MT /W0 /GS- /Tc dllenvhijacking.c
-move /y dllenvhijacking.obj dllenvhijacking.o
-dumpbin /disasm dllenvhijacking.o > dllenvhijacking.disasm
+REM Set this to your Visual Studio install path
+set VS_PATH="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build"
 
+REM Build x86
+call %VS_PATH%\vcvarsall.bat x86
+cl.exe /nologo /c /Od /MT /W0 /GS- /Tc dllenvhijacking.c /Fo:dllenvhijacking_x86.obj
+move /y dllenvhijacking_x86.obj dllenvhijacking.x86.o
+dumpbin /disasm dllenvhijacking.x86.o > dllenvhijacking.x86.disasm
+
+REM Build x64
+call %VS_PATH%\vcvarsall.bat x64
+cl.exe /nologo /c /Od /MT /W0 /GS- /Tc dllenvhijacking.c /Fo:dllenvhijacking_x64.obj
+move /y dllenvhijacking_x64.obj dllenvhijacking.x64.o
+dumpbin /disasm dllenvhijacking.x64.o > dllenvhijacking.x64.disasm
