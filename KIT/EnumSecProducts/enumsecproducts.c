@@ -5,109 +5,96 @@
 #include "enumsecproducts.h"
 #include "beacon.h"
 
-
 typedef struct {
     const char *filename;
-    const char *description;
-    const char *category;
+    const wchar_t *description;
+    const wchar_t *category;
 } SoftwareData;
 
-
-//START TrustedSec BOF print code: https://github.com/trustedsec/CS-Situational-Awareness-BOF/blob/master/src/common/base.c
 #ifndef bufsize
 #define bufsize 8192
 #endif
-char *output = 0;  
+char *output = 0;
 WORD currentoutsize = 0;
-HANDLE trash = NULL; 
+HANDLE trash = NULL;
 int bofstart();
 void internal_printf(const char* format, ...);
 void printoutput(BOOL done);
 
-int bofstart() {   
+int bofstart() {
     output = (char*)MSVCRT$calloc(bufsize, 1);
     currentoutsize = 0;
     return 1;
 }
 
-void internal_printf(const char* format, ...){
+void internal_printf(const char* format, ...) {
     int buffersize = 0;
     int transfersize = 0;
-    char * curloc = NULL;
-    char* intBuffer = NULL;
+    char *curloc = NULL;
+    char *intBuffer = NULL;
     va_list args;
     va_start(args, format);
-    buffersize = MSVCRT$vsnprintf(NULL, 0, format, args); 
+    buffersize = MSVCRT$vsnprintf(NULL, 0, format, args);
     va_end(args);
-    
+
     if (buffersize == -1) return;
-    
-    char* transferBuffer = (char*)KERNEL32$HeapAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, bufsize);
-	intBuffer = (char*)KERNEL32$HeapAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, buffersize);
+
+    char *transferBuffer = (char*)KERNEL32$HeapAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, bufsize);
+    intBuffer = (char*)KERNEL32$HeapAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, buffersize);
     va_start(args, format);
-    MSVCRT$vsnprintf(intBuffer, buffersize, format, args); 
+    MSVCRT$vsnprintf(intBuffer, buffersize, format, args);
     va_end(args);
-    if(buffersize + currentoutsize < bufsize) 
-    {
-        MSVCRT$memcpy(output+currentoutsize, intBuffer, buffersize);
+
+    if (buffersize + currentoutsize < bufsize) {
+        MSVCRT$memcpy(output + currentoutsize, intBuffer, buffersize);
         currentoutsize += buffersize;
     } else {
         curloc = intBuffer;
-        while(buffersize > 0)
-        {
+        while (buffersize > 0) {
             transfersize = bufsize - currentoutsize;
-            if(buffersize < transfersize) 
-            {
+            if (buffersize < transfersize) {
                 transfersize = buffersize;
             }
-            MSVCRT$memcpy(output+currentoutsize, curloc, transfersize);
+            MSVCRT$memcpy(output + currentoutsize, curloc, transfersize);
             currentoutsize += transfersize;
-            if(currentoutsize == bufsize)
-            {
-                printoutput(FALSE); 
+            if (currentoutsize == bufsize) {
+                printoutput(FALSE);
             }
-            MSVCRT$memset(transferBuffer, 0, transfersize); 
-            curloc += transfersize; 
+            MSVCRT$memset(transferBuffer, 0, transfersize);
+            curloc += transfersize;
             buffersize -= transfersize;
         }
     }
-	KERNEL32$HeapFree(KERNEL32$GetProcessHeap(), 0, intBuffer);
-	KERNEL32$HeapFree(KERNEL32$GetProcessHeap(), 0, transferBuffer);
+    KERNEL32$HeapFree(KERNEL32$GetProcessHeap(), 0, intBuffer);
+    KERNEL32$HeapFree(KERNEL32$GetProcessHeap(), 0, transferBuffer);
 }
 
 void printoutput(BOOL done) {
-    char * msg = NULL;
     BeaconOutput(CALLBACK_OUTPUT, output, currentoutsize);
     currentoutsize = 0;
     MSVCRT$memset(output, 0, bufsize);
-    if(done) {MSVCRT$free(output); output=NULL;}
+    if (done) {
+        MSVCRT$free(output);
+        output = NULL;
+    }
 }
-//END TrustedSec BOF print code.
-
-
-
 
 void go(char *args, int len) {
-	CHAR *hostName = "";
-	HANDLE handleHost = NULL;
+    CHAR *hostName = (CHAR *)"";
+    HANDLE handleHost = NULL;
     datap parser;
-	DWORD argSize = NULL;
-	WTS_PROCESS_INFOA * proc_info;
-	DWORD pi_count = 0;
-	LPSTR procName; 
-	bool foundSecProduct = false;
-	
+    int argSize = 0;
+    WTS_PROCESS_INFOA *proc_info;
+    DWORD pi_count = 0;
+    LPSTR procName;
+    bool foundSecProduct = false;
+
     BeaconDataParse(&parser, args, len);
     hostName = BeaconDataExtract(&parser, &argSize);
-	if(!bofstart()) return;
+    if (!bofstart()) return;
 
-	//allocate memory for list
-	size_t numSoftware = 150; //150
-    SoftwareData *softwareList = (SoftwareData *)KERNEL32$VirtualAlloc(NULL, numSoftware * sizeof(SoftwareData), MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-    if (softwareList == NULL) {
-		BeaconPrintf(CALLBACK_ERROR, "Failed to allocate memory for softwareList.\n");
-        return -1;
-    }
+    size_t numSoftware = 150;
+	SoftwareData softwareList[150];  // Static array
 
     //Start security product list
 	softwareList[0].filename = "avastsvc.exe";
@@ -712,50 +699,42 @@ void go(char *args, int len) {
 
 	//End security product list - LOWERCASE FILENAME
 
-	
-	//get handle to specified host
-	handleHost = WTSAPI32$WTSOpenServerA(hostName);
+ handleHost = WTSAPI32$WTSOpenServerA(hostName);
+    if (!WTSAPI32$WTSEnumerateProcessesA(handleHost, 0, 1, &proc_info, &pi_count)) {
+        BeaconPrintf(CALLBACK_ERROR, "Failed to get a valid handle to the specified host.\n");
+        return;
+    }
 
-	//get list of running processes 
-	if (!WTSAPI32$WTSEnumerateProcessesA(handleHost, 0, 1, &proc_info, &pi_count)) {
-		BeaconPrintf(CALLBACK_ERROR, "Failed to get a valid handle to the specified host.\n");
-		return -1;
-	}
-	
-	if(pi_count == 0) {
-		BeaconPrintf(CALLBACK_ERROR, "Couldn't list remote processes. Do you have enough privileges on the remote host?\n");
-		return -1;
-	}
+    if (pi_count == 0) {
+        BeaconPrintf(CALLBACK_ERROR, "Couldn't list remote processes. Do you have enough privileges on the remote host?\n");
+        return;
+    }
 
-	//compare list with running processes
-	internal_printf("Description\t\t\t\t\tCategory\n==============================================================\n");
-	for (int i = 0 ; i < pi_count ; i++ ) {
-		procName = proc_info[i].pProcessName;
-		
-		for (size_t i = 0; procName[i]; i++) {
-            procName[i] = MSVCRT$tolower(procName[i]); 
+    internal_printf("Description\t\t\t\t\tCategory\n==============================================================\n");
+    for (DWORD i = 0; i < pi_count; i++) {
+        procName = proc_info[i].pProcessName;
+
+        for (size_t j = 0; procName[j]; j++) {
+            procName[j] = MSVCRT$tolower(procName[j]);
         }
 
-		// internal_printf("%s\n", procName);
-		
-		for (size_t i = 0; i < numSoftware; i++) {
-			if (MSVCRT$strcmp(procName, softwareList[i].filename) == 0) {
-				internal_printf("%-50ls\t%ls\n", softwareList[i].description, softwareList[i].category);
-				foundSecProduct = true;
+        for (size_t k = 0; k < numSoftware; k++) {
+            if (MSVCRT$strcmp(procName, softwareList[k].filename) == 0) {
+                internal_printf("%-50ls\t%ls\n", softwareList[k].description, softwareList[k].category);
+                foundSecProduct = true;
                 break;
             }
-		}
-		procName = NULL;
-	}
-	
-	if (foundSecProduct) {
+        }
+        procName = NULL;
+    }
+
+    if (foundSecProduct) {
         printoutput(TRUE);
     } else {
         BeaconPrintf(CALLBACK_ERROR, "No running security processes were found.\n");
     }
-	
-	WTSAPI32$WTSCloseServer(handleHost);
-	KERNEL32$VirtualFree(softwareList, 0, MEM_RELEASE);
 
-    return 0;
+    WTSAPI32$WTSCloseServer(handleHost);
+    KERNEL32$VirtualFree(softwareList, 0, MEM_RELEASE);
+    return;
 }
